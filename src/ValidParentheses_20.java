@@ -12,21 +12,30 @@ import java.util.Stack;
  * 2、左括号必须以正确的顺序闭合。
  */
 public class ValidParentheses_20 {
-    /**
-     * 示例 1：    输入：s = "()"    输出：true
-     * 示例2：    输入：s = "()[]{}"    输出：true
-     * 示例3：    输入：s = "(]"    输出：false
-     * 示例4：    输入：s = "([)]"    输出：false
-     * 示例5：    输入：s = "{[]}"    输出：true
-     */
+  /**
+   * 示例 1： 输入：s = "()" 输出：true 示例2： 输入：s = "()[]{}" 输出：true 示例3： 输入：s = "(]" 输出：false 示例4： 输入：s =
+   * "([)]" 输出：false 示例5： 输入：s = "{[]}" 输出：true
+   */
 
-    /*
-     * 1、报错输入："(("，未判断运行结束栈是否为空
-     * 2、报错输入："){"，未判断栈在pop时是否为空。
-     * 3、报错输入"(){}}{"，未判断栈在pop时是否为空。
-     */
+  /*
+   * 1、报错输入："(("，未判断运行结束栈是否为空
+   * 2、报错输入："){"，未判断栈在pop时是否为空。
+   * 3、报错输入"(){}}{"，未判断栈在pop时是否为空。
+   */
 
-    public boolean isValid(String s) {
+  public static void main(String[] args) {
+      String s1 = "()";
+      String s2 = "()[]{}";
+      String s3 = "{[]}";
+    System.out.println(isValid(s1));
+    System.out.println(isValid(s2));
+    System.out.println(isValid(s3));
+    System.out.println(isValid1(s1));
+    System.out.println(isValid1(s2));
+    System.out.println(isValid1(s3));
+  }
+
+    public static boolean isValid(String s) {
         Stack<Character> charStack = new Stack<>();
         char[] chars = s.toCharArray();
         if (chars.length % 2 == 1) {
@@ -44,7 +53,7 @@ public class ValidParentheses_20 {
       return charStack.empty();
     }
 
-  private boolean checkParentheses(char left, char right) {
+  private static boolean checkParentheses(char left, char right) {
       if (left == '(') {
         return right == ')';
       }
@@ -58,7 +67,7 @@ public class ValidParentheses_20 {
   }
 
   // TODO:网上贴的大神答案
-  public boolean isValid1(String s) {
+  public static boolean isValid1(String s) {
     Stack<Character>stack = new Stack<>();
     for(char c: s.toCharArray()){
       if(c=='(')stack.push(')');
