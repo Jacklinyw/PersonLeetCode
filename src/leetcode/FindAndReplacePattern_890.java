@@ -43,16 +43,39 @@ public class FindAndReplacePattern_890 {
   public static List<String> findAndReplacePattern(String[] words, String pattern) {
     List<String> res = new ArrayList<>();
     for (String w : words) {
-    if (match(w,pattern)) {
+      if (match1(w, pattern)) {
         res.add(w);
       }
     }
     return res;
   }
 
+  private static boolean match1(String word, String pattern) {
+    Map<Character, Character> map = new HashMap<>();
+    for (int i = 0; i < word.length(); i++) {
+      char w = word.charAt(i);
+      char p = pattern.charAt(i);
+      if (!map.containsKey(w)) {
+        map.put(w, p);
+      } else if (map.get(w) != p) {
+        return false;
+      }
+    }
+
+    boolean [] boo = new boolean[26];
+    for (Character c : map.values()) {
+      if (boo[c - 'a']) {
+        return false;
+      } else {
+        boo[c - 'a'] = true;
+      }
+    }
+    return true;
+  }
+
   private static boolean match(String w, String pattern) {
-    Map<Character,Integer> word = new HashMap<>();
-    Map<Character,Integer> pat = new HashMap<>();
+    Map<Character, Integer> word = new HashMap<>();
+    Map<Character, Integer> pat = new HashMap<>();
     for (int i = 0; i < pattern.length(); i++) {
       if (!pat.containsKey(pattern.charAt(i))) {
         pat.put(pattern.charAt(i), i);
